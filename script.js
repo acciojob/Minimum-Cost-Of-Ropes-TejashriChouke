@@ -1,38 +1,20 @@
-//function calculateMinCost() {
+function calculateMinCost() {
   //your code here
-  import heapq
+  let string = document.getElementById("rope-lengths").value;
 
-def calculateMinCost(ropes):
-    if len(ropes) < 2:
-        return 0
+	let arr = string.split(",");
+	let finalValue =0;
+	while(arr.length > 1){
+		arr.sort((a,b) =>{return(a-b)});
+		let value = parseInt (arr.shift());    // converts to int and holds first element in the array.
+		let value1 = parseInt(arr.shift());    // hold 2nd element.
+		let mainValue = value + value1;
+		finalValue = finalValue + mainValue;
+		arr.push(mainValue);
 
-    # Convert the input list into a min-heap
-    heapq.heapify(ropes)
+	}
+  let result = document.getElementById("result");
+	result.innerText = finalValue;
+	return finalValue;
 
-    total_cost = 0
-
-    # Merge ropes until there is only one rope left in the heap
-    while len(ropes) > 1:
-        # Pop the two smallest ropes from the heap
-        smallest1 = heapq.heappop(ropes)
-        smallest2 = heapq.heappop(ropes)
-
-        # Calculate the cost of connecting these two ropes
-        cost = smallest1 + smallest2
-
-        # Add the cost back to the heap
-        heapq.heappush(ropes, cost)
-
-        # Add the cost to the total cost
-        total_cost += cost
-
-    return total_cost
-
-# Example usage:
-ropes = [4, 3, 2, 6]
-result = calculateMinCost(ropes)
-print("Minimum cost to connect ropes:", result)  # Output: 29
-
-  
-  
-}  
+}
